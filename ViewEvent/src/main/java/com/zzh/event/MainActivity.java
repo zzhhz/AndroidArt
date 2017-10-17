@@ -25,38 +25,25 @@ import android.view.ViewConfiguration;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "---事件体系---";
+    private static final String TAG = "---Activity---";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ViewConfiguration vc = ViewConfiguration.get(this);
-        int slop = vc.getScaledTouchSlop();
-        Log.d(TAG, "---onCreate: " + slop);
-        Log.d(TAG, "---onCreate  getApplicationContext: " + ViewConfiguration.get(getApplicationContext()).getScaledTouchSlop());
-        Log.d(TAG, "---onCreate  getBaseContext: " + ViewConfiguration.get(getBaseContext()).getScaledTouchSlop());
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        VelocityTracker vt = VelocityTracker.obtain();
-        vt.addMovement(event);
-        vt.computeCurrentVelocity(500);
+        boolean touchEvent = super.onTouchEvent(event);
+        Log.d(TAG, "\tonTouchEvent: \t" + touchEvent);
+        return touchEvent;
+    }
 
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                Log.d(TAG, "ACTION_DOWN  X: " + vt.getXVelocity());
-                Log.d(TAG, "ACTION_DOWN Y: " + vt.getYVelocity());
-                break;
-            case MotionEvent.ACTION_UP:
-                Log.d(TAG, "ACTION_UP X: " + vt.getXVelocity());
-                Log.d(TAG, "ACTION_UP Y: " + vt.getYVelocity());
-                break;
-        }
-        vt.clear();
-        vt.recycle();
-        return super.onTouchEvent(event);
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        boolean touchEvent = super.dispatchTouchEvent(ev);
+        Log.d(TAG, "\tdispatchTouchEvent: \t" + touchEvent);
+        return touchEvent;
     }
 }
