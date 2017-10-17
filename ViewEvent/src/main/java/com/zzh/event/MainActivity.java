@@ -1,12 +1,11 @@
 package com.zzh.event;
 
-import android.support.v4.widget.ViewDragHelper;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.VelocityTracker;
-import android.view.ViewConfiguration;
+import android.view.View;
+import android.view.Window;
 
 /**
  * Created by ZZH on 2017/10/16
@@ -23,7 +22,7 @@ import android.view.ViewConfiguration;
  * 3. right 右下角横坐标；
  * 4. bottom 右下角纵坐标
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private static final String TAG = "---Activity---";
 
@@ -31,19 +30,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Window window = getWindow();
+        Log.d(TAG, "Window: " + window);
+        View decorView = window.getDecorView();
+        Log.d(TAG, "decorView: " + decorView);
+        View view = decorView.findViewById(android.R.id.content);
+        Log.d(TAG, "view: " + view);
+
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "\t\t\t\tonTouchEvent: ");
         boolean touchEvent = super.onTouchEvent(event);
-        Log.d(TAG, "\tonTouchEvent: \t" + touchEvent);
         return touchEvent;
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "\t\t\t\tdispatchTouchEvent:");
         boolean touchEvent = super.dispatchTouchEvent(ev);
-        Log.d(TAG, "\tdispatchTouchEvent: \t" + touchEvent);
         return touchEvent;
     }
 }

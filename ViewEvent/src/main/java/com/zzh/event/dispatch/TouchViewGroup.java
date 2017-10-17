@@ -32,22 +32,24 @@ public class TouchViewGroup extends RelativeLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "\t\t\t\tdispatchTouchEvent:" );
         boolean touchEvent = super.dispatchTouchEvent(ev);
-        Log.d(TAG, "\tdispatchTouchEvent: \t" + touchEvent);
         return touchEvent;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.d(TAG, "\t\t\t\tonInterceptTouchEvent: \t");
         boolean touchEvent = super.onInterceptTouchEvent(ev);
-        Log.d(TAG, "\tonInterceptTouchEvent: \t" + touchEvent);
+        //if (ev.getAction() == MotionEvent.ACTION_DOWN)
         return touchEvent;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Log.d(TAG, "\t\t\t\tonTouchEvent: ");
         boolean touchEvent = super.onTouchEvent(event);
-        Log.d(TAG, "\tonTouchEvent: \t" + touchEvent);
+        //if (event.getAction() == MotionEvent.ACTION_DOWN)
         return touchEvent;
     }
 }

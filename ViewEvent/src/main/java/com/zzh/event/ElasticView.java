@@ -2,7 +2,6 @@ package com.zzh.event;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.annotation.Px;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Scroller;
@@ -36,7 +35,7 @@ public class ElasticView extends View {
 
 
     @Override
-    public void scrollTo(@Px int x, @Px int y) {
+    public void scrollTo(int x, int y) {
         super.scrollTo(x, y);
     }
 
