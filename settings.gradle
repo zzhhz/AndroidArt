@@ -1,1 +1,1 @@
-include ':app', ':Client', ':server', ':DataBinding', ':ViewEvent', ':LibExt', ':ViewPrinciple', ':AndroidAnimator', ':UnderstandWindowManger'
+include ':app', ':Client', ':server', ':DataBinding', ':ViewEvent', ':LibExt', ':ViewPrinciple', ':AndroidAnimator', ':UnderstandWindowManger', ':Kotlin'
