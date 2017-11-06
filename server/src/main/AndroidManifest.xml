@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <receiver android:name=".BroadCastRemoteReceiver">
+            <intent-filter>
+                <action android:name="com.zzh.action.common"/>
+                <action android:name="com.zzh.action.remote"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -86,7 +86,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 
 	private void initView()
 	{
-		mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
+		mViewPager =  findViewById(R.id.id_viewpager);
 
 		ChangeColorIconWithText one = (ChangeColorIconWithText) findViewById(R.id.id_indicator_one);
 		mTabIndicators.add(one);
@@ -222,14 +222,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	@Override
 	public void onPageSelected(int position)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onPageScrollStateChanged(int state)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
