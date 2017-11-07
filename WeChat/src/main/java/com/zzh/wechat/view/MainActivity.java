@@ -1,10 +1,5 @@
 package com.zzh.wechat.view;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -16,7 +11,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewConfiguration;
 import android.view.Window;
+
 import com.zzh.wechat.R;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends FragmentActivity implements OnClickListener,
 		OnPageChangeListener
@@ -88,13 +89,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	{
 		mViewPager =  findViewById(R.id.id_viewpager);
 
-		ChangeColorIconWithText one = (ChangeColorIconWithText) findViewById(R.id.id_indicator_one);
+		ChangeColorIconWithText one = findViewById(R.id.id_indicator_one);
 		mTabIndicators.add(one);
-		ChangeColorIconWithText two = (ChangeColorIconWithText) findViewById(R.id.id_indicator_two);
+		ChangeColorIconWithText two = findViewById(R.id.id_indicator_two);
 		mTabIndicators.add(two);
-		ChangeColorIconWithText three = (ChangeColorIconWithText) findViewById(R.id.id_indicator_three);
+		ChangeColorIconWithText three = findViewById(R.id.id_indicator_three);
 		mTabIndicators.add(three);
-		ChangeColorIconWithText four = (ChangeColorIconWithText) findViewById(R.id.id_indicator_four);
+		ChangeColorIconWithText four = findViewById(R.id.id_indicator_four);
 		mTabIndicators.add(four);
 
 		one.setOnClickListener(this);

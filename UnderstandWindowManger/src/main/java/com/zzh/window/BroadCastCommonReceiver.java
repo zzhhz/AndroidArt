@@ -12,7 +12,7 @@ import android.util.Log;
  * @email: zzh_hz@126.com
  * @QQ: 1299234582
  * @author: zzh
- * @description:
+ * @description: 接收广播，在同一个程序进程内
  */
 public class BroadCastCommonReceiver extends BroadcastReceiver {
     private String TAG = "BroadCastCommonReceiver";

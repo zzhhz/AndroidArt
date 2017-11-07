@@ -13,7 +13,7 @@ import android.view.View;
  * @email: zzh_hz@126.com
  * @QQ: 1299234582
  * @author: zzh
- * @description: 广播
+ * @description: 发送广播
  */
 public class RemoteActivity extends AppCompatActivity {
     @Override

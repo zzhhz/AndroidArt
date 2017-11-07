@@ -30,6 +30,8 @@
                 <action android:name="com.zzh.action.remote"/>
             </intent-filter>
         </receiver>
+
+        <service android:name=".service.DemoIntentService"/>
     </application>
 
 </manifest>
