@@ -44,6 +44,13 @@ public class User implements Parcelable {
     }
 
 
+    public User(String name, String id, String pId) {
+        this.name = name;
+        this.id = id;
+        this.pId = pId;
+    }
+
+
     public User() {
     }
 
@@ -76,4 +83,13 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", pId='" + pId + '\'' +
+                '}';
+    }
 }
