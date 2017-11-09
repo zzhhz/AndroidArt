@@ -26,7 +26,6 @@ import com.zzh.zlibs.base.BaseNoSwipeBackActivity;
  * @Description: 相机21版本之前的使用方式
  */
 public class MainActivity extends AppCompatActivity {
-    Camera open;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
          * Camera 相机是一种硬件资源。
          */
         if (cameras > 0) {
-            open = Camera.open(0);
-            LiveCameraView cameraView = new LiveCameraView(this, open);
+            LiveCameraView cameraView = new LiveCameraView(this, null);
             setContentView(cameraView);
             /*Camera.Parameters parameters = open.getParameters();
             //配置光线不足自动闪光
@@ -60,10 +58,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (open != null) {
-            open.lock();
-            open.release();
-            open = null;
-        }
     }
 }

@@ -2,7 +2,10 @@ package com.zzh.camera;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.ImageFormat;
+import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -27,17 +30,42 @@ public class LiveCameraView extends SurfaceView implements SurfaceHolder.Callbac
 
     public void setCamera(Camera camera) {
         //
-        final Camera.Parameters params = mCamera.getParameters();
-        params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-        params.setSceneMode(Camera.Parameters.SCENE_MODE_BARCODE);
-       // mCamera.setParameters(params);
-    }
 
+        /*
+        if (Build.MODEL.equals("KORIDY H30")){
+            params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+
+        } else {
+            params.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+        }
+        mCamera.setParameters(params);*/
+
+        mCamera.autoFocus(new Camera.AutoFocusCallback() {
+            @Override
+            public void onAutoFocus(boolean success, Camera camera) {
+                if (success) {
+                    camera.cancelAutoFocus();// 只有加上了这一句，才会自动对焦。
+                    Camera.Parameters params = mCamera.getParameters();
+                    params.setPictureFormat(ImageFormat.JPEG);
+                    params.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
+                    if (!Build.MODEL.equals("KORIDY H30")) {
+                        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);// 1连续对焦
+                    }else{
+                        params.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
+                    }
+                    camera.setParameters(params);
+                }
+            }
+        });
+    }
 
 
     public LiveCameraView(Context context, Camera camera) {
         super(context);
         mCamera = camera;
+        if (mCamera == null) {
+            mCamera = Camera.open(0);
+        }
         setCamera(camera);
         mContext = context;
         mSurfaceHolder = getHolder();
@@ -66,6 +94,7 @@ public class LiveCameraView extends SurfaceView implements SurfaceHolder.Callbac
         mCamera.setPreviewCallback(null);
         mCamera.stopPreview();
         mCamera.lock();
+        mCamera.release();
         mCamera = null;
     }
 
@@ -77,6 +106,7 @@ public class LiveCameraView extends SurfaceView implements SurfaceHolder.Callbac
         if (mCamera == null) {
             mCamera = Camera.open(0);
             setCamera(mCamera);
+            followScreenOrientation(mContext, mCamera);
         }
     }
 
