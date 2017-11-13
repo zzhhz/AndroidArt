@@ -3,10 +3,8 @@ package com.zzh.camera;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.ImageFormat;
-import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.os.Build;
-import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
