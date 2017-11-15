@@ -6,6 +6,14 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.bumptech.glide.request.target.Target;
 
 /**
  * Created by ZZH on 2017/10/16
@@ -25,6 +33,7 @@ import android.view.Window;
 public class MainActivity extends Activity {
 
     private static final String TAG = "---Activity---";
+    private ImageView iv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +45,9 @@ public class MainActivity extends Activity {
         Log.d(TAG, "decorView: " + decorView);
         View view = decorView.findViewById(android.R.id.content);
         Log.d(TAG, "view: " + view);
+        iv = findViewById(R.id.iv);
+        Glide.with(this).load("http://owyzv729q.bkt.clouddn.com/m2_industrial_picture_1510710866336_0.gif")
+                .into(new GlideDrawableImageViewTarget(iv, 100));
 
     }
 

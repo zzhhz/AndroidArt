@@ -6,12 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
+import android.graphics.Rect;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
+import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
+import android.hardware.camera2.params.MeteringRectangle;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Build;
@@ -24,7 +27,6 @@ import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
@@ -52,7 +54,11 @@ public class LiveCamera21AView extends SurfaceView implements SurfaceHolder.Call
     private Handler childHandler, mainHandler;
     protected int width, height;
     private Context mContext;
+    private OnCameraClickListener mOnCameraClickListener;
 
+    public void setOnCameraClickListener(OnCameraClickListener onCameraClickListener) {
+        mOnCameraClickListener = onCameraClickListener;
+    }
 
     public LiveCamera21AView(Context context) {
         this(context, null);
@@ -80,14 +86,6 @@ public class LiveCamera21AView extends SurfaceView implements SurfaceHolder.Call
 
     }
 
-    public void setShowWidth(int width) {
-        this.width = width;
-    }
-
-    public void setShowHeight(int height) {
-        this.height = height;
-    }
-
     /**
      * 打开相机操作
      */
@@ -113,6 +111,9 @@ public class LiveCamera21AView extends SurfaceView implements SurfaceHolder.Call
                 //将image字节，放到bytes中
                 byte[] bytes = new byte[byteBuffer.remaining()];
                 byteBuffer.get(bytes);
+                if (mOnCameraClickListener != null) {
+                    mOnCameraClickListener.onTakePicture(bytes);
+                }
                 //转换成bitmap对象。
 
             }
@@ -154,7 +155,7 @@ public class LiveCamera21AView extends SurfaceView implements SurfaceHolder.Call
 
         @Override
         public void onError(@NonNull CameraDevice camera, int error) {
-            if (camera != null){
+            if (camera != null) {
                 camera.close();
                 camera = null;
                 mCameraDevice = null;
@@ -169,6 +170,8 @@ public class LiveCamera21AView extends SurfaceView implements SurfaceHolder.Call
     private void takePreview() {
         try {
             final CaptureRequest.Builder builder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+
+
             builder.addTarget(mSurfaceHolder.getSurface());
             mCameraDevice.createCaptureSession(Arrays.asList(mSurfaceHolder.getSurface(), mImageReader.getSurface()), new CameraCaptureSession.StateCallback() {
                 @Override
@@ -177,8 +180,11 @@ public class LiveCamera21AView extends SurfaceView implements SurfaceHolder.Call
                         return;
                     }
                     mCameraCaptureSession = session;
+                    builder.set(CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL);
                     builder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
                     builder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
+                    /*Rect rect = new Rect();
+                    builder.set(CaptureRequest.CONTROL_AF_REGIONS, new MeteringRectangle[]{new MeteringRectangle(rect, 100)});*/
                     try {
                         mCameraCaptureSession.setRepeatingRequest(builder.build(), null, childHandler);
                     } catch (CameraAccessException e) {
@@ -223,5 +229,13 @@ public class LiveCamera21AView extends SurfaceView implements SurfaceHolder.Call
         DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
         Log.d(TAG, "getDisplayWidthAndHeight: " + metrics.widthPixels + ", " + metrics.heightPixels);
         return new int[]{metrics.widthPixels, metrics.heightPixels};
+    }
+
+    /**
+     * 将点击事件回调出去
+     */
+    public interface OnCameraClickListener {
+        void onTakePicture(byte[] picture);
+
     }
 }

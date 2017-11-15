@@ -21,4 +21,11 @@
 
     </com.zzh.event.dispatch.TouchViewGroup>
 
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:background="#0095ff"/>
+
 </com.zzh.event.dispatch.TouchActivityGroup>
