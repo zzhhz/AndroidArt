@@ -38,14 +38,14 @@ public class HandlerActivity extends AppCompatActivity {
         Thread child = new Thread("child thread") {
             @Override
             public void run() {
-                //Looper.prepare();
-                childHandler = new Handler() {
+                Looper.prepare();
+                childHandler = new Handler(Looper.myLooper()) {
                     @Override
                     public void handleMessage(Message msg) {
                         Log.d("child", "----" + Thread.currentThread().getName() + ",  " + msg.obj);
                     }
                 };
-                //Looper.loop();
+                Looper.loop();
             }
         };
         child.start();
