@@ -9,14 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.zzh.ipc.R;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by user on 2017/11/28.
@@ -44,14 +38,14 @@ public class HandlerActivity extends AppCompatActivity {
         Thread child = new Thread("child thread") {
             @Override
             public void run() {
-                Looper.prepare();
-                childHandler = new Handler(Looper.myLooper()) {
+                //Looper.prepare();
+                childHandler = new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
                         Log.d("child", "----" + Thread.currentThread().getName() + ",  " + msg.obj);
                     }
                 };
-                Looper.loop();
+                //Looper.loop();
             }
         };
         child.start();
