@@ -55,4 +55,6 @@ public class LoginUser extends BaseObservable {
         this.password = password;
         notifyPropertyChanged(BR.password);
     }
+
+
 }

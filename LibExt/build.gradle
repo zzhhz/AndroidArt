@@ -31,5 +31,7 @@ dependencies {
     compile('com.github.zzhhz:ZzhLibs:0.1.9') {
         exclude group: 'com.android.support'
     }
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'org.xutils:xutils:3.5.0'
     testCompile 'junit:junit:4.12'
 }

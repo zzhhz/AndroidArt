@@ -120,6 +120,7 @@
     <orderEntry type="library" exported="" name="com.android.support:support-core-utils-26.1.0" level="project" />
     <orderEntry type="library" exported="" name="com.android.support.constraint:constraint-layout-1.0.2" level="project" />
     <orderEntry type="library" exported="" name="com.android.support:support-core-ui-26.1.0" level="project" />
+    <orderEntry type="library" exported="" name="org.xutils:xutils-3.5.0" level="project" />
     <orderEntry type="module" module-name="LibExt" exported="" />
   </component>
 </module>
