@@ -2,6 +2,7 @@ package com.zzh.main.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 /**
  * Created by user on 2017/10/16.
@@ -12,7 +13,7 @@ import android.os.Parcelable;
  * @author: zzh
  * @description:
  */
-public class Book implements Parcelable{
+public class Book implements Parcelable, Comparable<Book> {
 
     private int bookId;
     private String bookName;
@@ -59,5 +60,10 @@ public class Book implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(bookId);
         parcel.writeString(bookName);
+    }
+
+    @Override
+    public int compareTo(@NonNull Book o) {
+        return o.getBookName().compareTo(bookName);
     }
 }

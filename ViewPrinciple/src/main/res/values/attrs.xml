@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MultipleImageLayout">
+        <attr name="image_max_show" format="integer"/>
+        <attr name="image_column" format="integer"/>
+        <attr name="image_column_dimen" format="integer"/>
+        <attr name="image_row_dimen" format="integer"/>
+    </declare-styleable>
+</resources>
